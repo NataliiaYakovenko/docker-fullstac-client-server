@@ -27,10 +27,11 @@ contestsRouter.post(
 //   contestController.dataForContest,
 // );
 
-// contestsRouter.post(
-//   '/contests/byCustomer',
-//   checkToken.checkToken,
-//   contestController.getCustomersContests,
-// );
+//GET http://localhost:5000/contests/byCustomer
+contestsRouter.get(
+  '/byCustomer',
+  checkToken.checkToken,
+  contestController.getCustomersContests,
+);
 
 module.exports = contestsRouter;
