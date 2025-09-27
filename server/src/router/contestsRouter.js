@@ -34,4 +34,12 @@ contestsRouter.get(
   contestController.getCustomersContests,
 );
 
+//GET http://localhost:5000/contests/contestId
+contestsRouter.get(
+  '/contestId',
+  checkToken.checkToken,
+  basicMiddlewares.canGetContest,
+  contestController.getContestById,
+);
+
 module.exports = contestsRouter;
