@@ -41,7 +41,10 @@ module.exports.dataForContest = async (req, res, next) => {
 };
 
 module.exports.getContestById = async (req, res, next) => {
-  const { params:{ contestId }, tokenData: { userId, role } } = req;
+  const {
+    params: { contestId },
+    tokenData: { userId, role },
+  } = req;
   try {
     let contestInfo = await db.Contests.findOne({
       where: { id: contestId },
@@ -57,10 +60,7 @@ module.exports.getContestById = async (req, res, next) => {
         {
           model: db.Offers,
           required: false,
-          where:
-            role === CONSTANTS.CREATOR
-              ? { userId }
-              : {},
+          where: role === CONSTANTS.CREATOR ? { userId } : {},
           attributes: { exclude: ['userId', 'contestId'] },
           include: [
             {
@@ -304,8 +304,7 @@ module.exports.getContests = (req, res, next) => {
     .then((contests) => {
       contests.forEach(
         (contest) =>
-          (contest.dataValues.count = contest.dataValues.Offers.length),
-      );
+          (contest.dataValues.count = contest.dataValues.Offers.length));
       let haveMore = true;
       if (contests.length === 0) {
         haveMore = false;
@@ -315,4 +314,17 @@ module.exports.getContests = (req, res, next) => {
     .catch((err) => {
       next(new ServerError());
     });
+};
+
+module.exports.getAllOffers = async (req, res, next) => {
+  const { limmit = 8, offset = 0 } = req.query;
+  try {
+    const foundOffers = await db.Offers.findAll(
+      { limmit, offset },
+      { raw: true },
+    );
+    return res.status(200).send(foundOffers);
+  }catch (err) {
+    next(new ServerError());
+  }
 };

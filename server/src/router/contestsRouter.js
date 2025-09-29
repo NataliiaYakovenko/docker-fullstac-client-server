@@ -13,7 +13,6 @@ const contestsRouter = express.Router();
 //POST http://localhost:5000/contests
 contestsRouter.post(
   '/',
-  checkToken.checkToken,
   basicMiddlewares.onlyForCustomer,
   upload.uploadContestFiles,
   basicMiddlewares.parseBody,
@@ -30,14 +29,12 @@ contestsRouter.post(
 //GET http://localhost:5000/contests/byCustomer
 contestsRouter.get(
   '/byCustomer',
-  checkToken.checkToken,
   contestController.getCustomersContests,
 );
 
 //GET http://localhost:5000/contests/contestId
 contestsRouter.get(
   '/contestId',
-  checkToken.checkToken,
   basicMiddlewares.canGetContest,
   contestController.getContestById,
 );
