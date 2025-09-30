@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       operationType: {
-        type: Sequelize.ENUM('INCOM', 'EXPENS'),
+        type: Sequelize.ENUM('INCOME', 'EXPENS'),
       },
       userId: {
         type: Sequelize.INTEGER,
