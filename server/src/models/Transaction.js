@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       summa: {
         type:DataTypes.DECIMAL,
         validate: {
-          gt: 0,
+          min: 0,
         },
       },
     },
