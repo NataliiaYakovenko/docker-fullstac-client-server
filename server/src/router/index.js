@@ -24,6 +24,8 @@ router.post('/login', validators.validateLogin, userController.login);
 
 router.use('/contests', contestsRouter);
 
+router.use('/users/id/transactions', userController.getTransactions);
+
 router.post('/getUser', checkToken.checkAuth);
 
 router.get('/offers', contestController.getAllOffers);
