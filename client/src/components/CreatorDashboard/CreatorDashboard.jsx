@@ -15,6 +15,7 @@ import ContestBox from '../ContestBox/ContestBox';
 import styles from './CreatorDashboard.module.sass';
 import TryAgain from '../TryAgain/TryAgain';
 import CONSTANTS from '../../constants';
+import BagesFilterContainer, { bagesParams } from './BagesFilterContainer';
 
 const types = [
   '',
@@ -61,7 +62,7 @@ class CreatorDashboard extends React.Component {
     const { creatorFilter } = this.props;
     const { industry } = this.props.dataForContest.data;
     array.push(
-      <option key={0} value={null}>
+      <option key={0} value={''}>
         Choose industry
       </option>
     );
@@ -114,11 +115,11 @@ class CreatorDashboard extends React.Component {
   changePredicate = ({ name, value }) => {
     const { creatorFilter } = this.props;
     this.props.newFilter({
-      [name]: value === 'Choose industry' ? null : value,
+      [name]: value === 'Choose industry' ? '' : value,
     });
     this.parseParamsToUrl({
       ...creatorFilter,
-      ...{ [name]: value === 'Choose industry' ? null : value },
+      ...{ [name]: value === 'Choose industry' ? '' : value },
     });
   };
 
@@ -200,6 +201,12 @@ class CreatorDashboard extends React.Component {
   render() {
     const { error, haveMore, creatorFilter } = this.props;
     const { isFetching } = this.props.dataForContest;
+
+    const bagesParams = [
+      {label: 'My Entries',name: 'ownEntries', defaultValue: false},
+      { label: 'Contest ID', name: 'contestId', defaultValue: '' },
+    ];
+
     return (
       <div className={styles.mainContainer}>
         <div className={styles.filterContainer}>
@@ -260,39 +267,11 @@ class CreatorDashboard extends React.Component {
               </select>
             </div>
             <div>
-              <ul>
-                {creatorFilter.ownEntries && (
-                  <li>
-                    My Entries
-                    <button
-                      onClick={() => {
-                        this.changePredicate({
-                          name: 'ownEntries',
-                          value: false,
-                        });
-                      }}
-                    >
-                      X
-                    </button>
-                  </li>
-                )}
-
-                {creatorFilter.contestId && (
-                  <li>
-                    Contest ID
-                    <button
-                      onClick={() => {
-                        this.changePredicate({
-                          name: 'contestId',
-                          value: '',
-                        });
-                      }}
-                    >
-                      X
-                    </button>
-                  </li>
-                )}
-              </ul>
+              <BagesFilterContainer
+                creatorFilter={creatorFilter}
+                changePredicate={this.changePredicate}
+                bagesParams={bagesParams}
+              />
             </div>
           </div>
         </div>
