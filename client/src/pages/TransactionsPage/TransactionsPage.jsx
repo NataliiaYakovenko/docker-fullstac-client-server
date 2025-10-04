@@ -1,7 +1,15 @@
-import React from 'react';
-import Header from '../Header/Header';
+import React, { useEffect } from 'react';
+import Header from '../../components/Header/Header';
+import { connect } from 'react-redux';
+import { getTransactions } from '../../store/slices/transactionsSlise';
 
-const TransactionsPage = () => {
+const TransactionsPage = ({ transactions, isFetching, error, get }) => {
+
+  useEffect(()=>{
+      get()
+  },[])
+
+
   const transaction = [
     {
       id: 1,
@@ -47,4 +55,10 @@ const TransactionsPage = () => {
   );
 };
 
-export default TransactionsPage;
+const mapStateToProps = ({ transactionsStore }) => transactionsStore;
+
+const mapDispatchToProps = (dispatch) => ({
+  get: () => dispatch(getTransactions()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsPage);

@@ -19,7 +19,7 @@ import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import PricingPage from './pages/PricingPage/PricingPage';
-import TransactionsPage from './components/TransactionsPage/TransactionsPage';
+import TransactionsPage from './pages/TransactionsPage/TransactionsPage';
 
 class App extends Component {
   render () {
