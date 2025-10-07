@@ -47,4 +47,29 @@ describe('Testing app', () => {
       });
     });
   });
+  describe('testing private endpoint', () => {
+    let token = '';
+    before((done)=>{
+      request(app).post('/login').send(userCredentials)
+        .then(response=>{
+          const token =response.body.token;
+          done();
+        })
+        .catch(error=>done(error));
+    });
+    describe('POST /getUser', () => {
+      it('Response should be 200 (user) when token exists and correct', (done) => {
+        request(app)
+          .post('/getUser')
+          .set('Authorization', '')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .then(response=>{
+            expect(response.bady.email).to.equal(userCredentials.email);
+            done();
+          })
+          .catch(error=>done(error));
+      });
+    });
+  });
 });
