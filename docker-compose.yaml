@@ -25,7 +25,8 @@ services:
       - mongo-prod
     volumes:
       - /var/www/html/images:/var/www/html/images
-
+      - ./server/src/config:/src/server/config  
+    command: node src/index.js
   db-prod:
     image: postgres:13.2-alpine
     environment:
@@ -44,7 +45,7 @@ services:
       - ./data/db:/data/db
     ports:
       - "27017:27017"
-    command: mongod --smallfiles --logpath=/dev/null
+    command: mongod --logpath=/dev/null
 
 volumes:
   server-prod:
