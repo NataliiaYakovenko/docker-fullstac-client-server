@@ -25,6 +25,7 @@ module.exports.findUser = async (predicate, transaction) => {
 };
 
 module.exports.userCreation = async data => {
+  console.log(data, 333);
   const newUser = await bd.Users.create(data);
   if (!newUser) {
     throw new ServerError('server error on user creation');

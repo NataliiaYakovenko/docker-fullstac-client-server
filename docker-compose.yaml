@@ -19,7 +19,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - "3000:3000"
+      - "5000:5000"
     depends_on:
       - db-prod
       - mongo-prod
@@ -30,7 +30,7 @@ services:
   db-prod:
     image: postgres:13.2-alpine
     environment:
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=todo-prod
     ports:

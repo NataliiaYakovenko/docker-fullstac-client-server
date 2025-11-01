@@ -36,9 +36,13 @@ module.exports.login = async (req, res, next) => {
 };
 module.exports.registration = async (req, res, next) => {
   try {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    console.log('111111111');
     const newUser = await userQueries.userCreation(
       Object.assign(req.body, { password: req.hashPass }),
     );
+    console.log(newUser, 222);
     const accessToken = jwt.sign(
       {
         firstName: newUser.firstName,
