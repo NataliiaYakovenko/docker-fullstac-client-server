@@ -1,10 +1,10 @@
 
 module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define(
-    'Transactions',
+    'Transaction',
     {
       operationType: {
-        type: DataTypes.ENUM('INCOM', 'EXPENCE'),
+        type: DataTypes.ENUM('INCOME', 'EXPENSE'),
         allowNull: false,
       },
       summa: {
@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    {
-      timestamps: false,
-    },
+    // {
+    //   timestamps: false,
+    // },
   );
   Transaction.associate = function (models){
     Transaction.belongsTo(models.Users, { foreignKey: { name: 'userId', allowNull: false } });

@@ -22,7 +22,8 @@ router.post(
 
 router.post('/login', validators.validateLogin, userController.login);
 
-router.use('/contests', contestsRouter);
+//додала checkToken.checkToken
+router.use('/contests', checkToken.checkToken, contestsRouter);
 
 router.use('/users/id/transactions', userController.getTransactions);
 

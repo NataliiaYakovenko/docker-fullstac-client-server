@@ -9,6 +9,7 @@ const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
 
+
 module.exports.login = async (req, res, next) => {
   try {
     const foundUser = await userQueries.findUser({ email: req.body.email });
@@ -36,13 +37,10 @@ module.exports.login = async (req, res, next) => {
 };
 module.exports.registration = async (req, res, next) => {
   try {
-    // eslint-disable-next-line no-debugger
-    debugger;
-    console.log('111111111');
+
     const newUser = await userQueries.userCreation(
       Object.assign(req.body, { password: req.hashPass }),
     );
-    console.log(newUser, 222);
     const accessToken = jwt.sign(
       {
         firstName: newUser.firstName,
@@ -169,7 +167,7 @@ module.exports.payment = async (req, res, next) => {
     await bd.Contests.bulkCreate(req.body.contests, { transaction });
 
     const newTransaction = {
-      operationType: 'EXPENCE',
+      operationType: 'EXPENSE',
       userId: req.tokenData.userId,
       summa: req.body.price,
     };

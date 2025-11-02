@@ -1,12 +1,12 @@
 {
   "development": {
     "database": "squadhelp-chat_dev",
-    "host": "mongo-prod",
+    "host": "mongo-dev",
     "port": 27017
   },
    "test": {
     "database": "squadhelp-chat_test",
-    "host": "mongo-prod",
+    "host": "mongo-test",
     "port": 27017
   },
   "production": {

@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       operationType: {
-        type: Sequelize.ENUM('INCOME', 'EXPENS'),
+        type: Sequelize.ENUM('INCOME', 'EXPENSE'),
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -25,16 +25,16 @@ module.exports = {
         allowNull: false,
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
       },
     });
     await queryInterface.addConstraint('Transactions', {
-      fields:['suma'],
+      fields:['summa'],
       type: 'check',
       where:{ summa:{ [ Op.gt ] : 0 } },
     });

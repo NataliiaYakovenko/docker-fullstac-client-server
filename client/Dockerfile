@@ -12,7 +12,7 @@ COPY . .
 
 EXPOSE 5000
 
-RUN npm install
+RUN npm install --network-timeout=600000
 
 RUN chown -R node:node /client/node_modules
 
