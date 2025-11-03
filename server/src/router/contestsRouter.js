@@ -32,9 +32,9 @@ contestsRouter.get(
   contestController.getCustomersContests,
 );
 
-//GET http://localhost:5000/contests/contestId
+//GET http://localhost:5000/contests/:contestId
 contestsRouter.get(
-  '/contestId',
+  '/:contestId',
   basicMiddlewares.canGetContest,
   contestController.getContestById,
 );

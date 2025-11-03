@@ -10,7 +10,7 @@ instance.interceptors.request.use(
   config => {
     const token = window.localStorage.getItem(CONTANTS.ACCESS_TOKEN);
     if (token) {
-      config.headers = { ...config.headers, Authorization: token };
+      config.headers = { ...config.headers,   Authorization: `Bearer ${token}` };
     }
     return config;
   },
@@ -26,7 +26,7 @@ instance.interceptors.response.use(
   },
   err => {
     if (
-      err.response.status === 408 &&
+      err.response.status === 401 &&
       history.location.pathname !== '/login' &&
       history.location.pathname !== '/registration' &&
       history.location.pathname !== '/'
